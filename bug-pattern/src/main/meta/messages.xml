@@ -14,6 +14,12 @@
     </Details>
   </Detector>
 
+  <Detector class="jp.co.worksap.oss.findbugs.CheckDeleteTempFile">
+    <Details>
+      Please delete the temporary files.
+    </Details>
+  </Detector>
+
   <BugPattern type="FORBIDDEN_SYSTEM">
     <ShortDescription>code for publish can not use System.out
     </ShortDescription>
@@ -23,6 +29,20 @@
     <Details>  
   <![CDATA[
     <p>System.out and System.err are forbidden，please use log</p>  
+  ]]>
+    </Details>
+  </BugPattern>
+
+  <BugPattern type="DELETE_TEMP_FILE">
+    <ShortDescription>
+        Please delete the temporary files.
+    </ShortDescription>
+    <LongDescription>
+        Please delete the temporary files.
+    </LongDescription>
+    <Details>  
+  <![CDATA[
+    <p>Please delete the temporary files.</p>  
   ]]>
     </Details>
   </BugPattern>

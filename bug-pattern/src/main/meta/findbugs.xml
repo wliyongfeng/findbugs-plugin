@@ -5,7 +5,11 @@
 
   <Detector class="jp.co.worksap.oss.findbugs.ForbiddenSystemClass"
     speed="fast" hidden="false" />
+  <Detector class="jp.co.worksap.oss.findbugs.CheckDeleteTempFile"
+    speed="fast" hidden="false" />
   <BugPattern type="FORBIDDEN_SYSTEM" abbrev="SYS"
+    category="CORRECTNESS" />
+  <BugPattern type="DELETE_TEMP_FILE" abbrev="SYS"
     category="CORRECTNESS" />
 
 </FindbugsPlugin>
