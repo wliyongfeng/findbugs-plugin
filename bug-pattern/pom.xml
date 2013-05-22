@@ -72,5 +72,23 @@
       <version>1.9.0</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.youdevise</groupId>
+      <artifactId>test-driven-detectors4findbugs</artifactId>
+      <version>0.2.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-jdk14</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+    </dependency>
   </dependencies>
 </project>
