@@ -6,13 +6,20 @@ import edu.umd.cs.findbugs.BugInstance;
 import edu.umd.cs.findbugs.BugReporter;
 import edu.umd.cs.findbugs.bcel.OpcodeStackDetector;
 
-public class CheckDeleteTempFile extends OpcodeStackDetector {
+/**
+ * This class detect whether the temporary file created be deleted in a same
+ * method.
+ *
+ * @author Yongfeng LI
+ *
+ */
+public class TempFileDetector extends OpcodeStackDetector {
     private String methodName = null;
     private boolean isTempFileCreated = false;
     private boolean isCreatedFileDeleted = false;
     BugReporter bugReporter;
 
-    public CheckDeleteTempFile(BugReporter bugReporter) {
+    public TempFileDetector(BugReporter bugReporter) {
         this.bugReporter = bugReporter;
     }
 
