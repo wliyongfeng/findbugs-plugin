@@ -1,5 +1,7 @@
 package jp.co.worksap.oss.findbugs;
 
+import java.util.Arrays;
+
 import org.apache.bcel.classfile.Method;
 
 import edu.umd.cs.findbugs.BugInstance;
@@ -14,6 +16,8 @@ import edu.umd.cs.findbugs.bcel.OpcodeStackDetector;
  *
  */
 public class TempFileDetector extends OpcodeStackDetector {
+    private static final int[] LEAVE_METHOD_CODE = { ARETURN, RETURN, LRETURN,
+        FRETURN, DRETURN, IRETURN, ATHROW };
     private String methodName = null;
     private boolean isTempFileCreated = false;
     private boolean isCreatedFileDeleted = false;
@@ -25,21 +29,14 @@ public class TempFileDetector extends OpcodeStackDetector {
 
     @Override
     public void sawOpcode(int seen) {
-        if (!visitingMethod()) {
-            if (methodName != null) {
-                methodEndDealing();
-                methodName = null;
-            }
-        } else {
-            if (seen == INVOKESTATIC
-                    && getClassConstantOperand().endsWith("TemporaryFile")
-                    && getNameConstantOperand().equals("newTemporaryFile")) {
-                isTempFileCreated = true;
-            } else if (seen == INVOKEVIRTUAL
-                    && getClassConstantOperand().endsWith("TemporaryFile")
-                    && getNameConstantOperand().equals("deleteQuietly")) {
-                isCreatedFileDeleted = true;
-            }
+        if (seen == INVOKESTATIC
+                && getClassConstantOperand().endsWith("TemporaryFile")
+                && getNameConstantOperand().equals("newTemporaryFile")) {
+            isTempFileCreated = true;
+        } else if (seen == INVOKEVIRTUAL
+                && getClassConstantOperand().endsWith("TemporaryFile")
+                && getNameConstantOperand().equals("deleteQuietly")) {
+            isCreatedFileDeleted = true;
         }
     }
 
@@ -48,11 +45,16 @@ public class TempFileDetector extends OpcodeStackDetector {
         visit(obj);
         if (null == methodName) {
             methodName = getMethodName();
-        } else if (!methodName.equals(getMethodName())) {
-            methodEndDealing();
-            methodName = getMethodName();
         }
         initBeforeMethod();
+    }
+
+    @Override
+    public void afterOpcode(int code) {
+        if (Arrays.asList(LEAVE_METHOD_CODE).contains(code)
+                && methodName != null) {
+            methodEndDealing();
+        }
     }
 
     private void initBeforeMethod() {

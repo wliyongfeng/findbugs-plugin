@@ -14,7 +14,7 @@
     </Details>
   </Detector>
 
-  <Detector class="jp.co.worksap.oss.findbugs.CheckDeleteTempFile">
+  <Detector class="jp.co.worksap.oss.findbugs.TempFileDetector">
     <Details>
       Please delete the temporary files.
     </Details>

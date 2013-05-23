@@ -1,1 +1,2 @@
 0 BugPattern FORBIDDEN_SYSTEM
+1 BugPattern DELETE_TEMP_FILE
