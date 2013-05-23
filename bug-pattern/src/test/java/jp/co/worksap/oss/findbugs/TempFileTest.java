@@ -8,11 +8,7 @@ public class TempFileTest {
 
     public void test() throws IOException {
         TemporaryFile tempFile = TemporaryFile.newTemporaryFile();
-        try {
-            Files.touch(tempFile);
-        } finally {
-            tempFile.deleteQuietly();
-        }
+        Files.touch(tempFile);
     }
 
 }

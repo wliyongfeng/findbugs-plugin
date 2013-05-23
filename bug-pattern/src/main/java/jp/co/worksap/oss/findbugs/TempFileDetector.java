@@ -1,8 +1,10 @@
 package jp.co.worksap.oss.findbugs;
 
-import java.util.Arrays;
+import java.util.List;
 
 import org.apache.bcel.classfile.Method;
+
+import com.google.common.primitives.Ints;
 
 import edu.umd.cs.findbugs.BugInstance;
 import edu.umd.cs.findbugs.BugReporter;
@@ -43,16 +45,15 @@ public class TempFileDetector extends OpcodeStackDetector {
     @Override
     public void visitMethod(Method obj) {
         visit(obj);
-        if (null == methodName) {
-            methodName = getMethodName();
-        }
+        methodName = getMethodName();
         initBeforeMethod();
     }
 
     @Override
     public void afterOpcode(int code) {
-        if (Arrays.asList(LEAVE_METHOD_CODE).contains(code)
-                && methodName != null) {
+        List<Integer> targets = Ints.asList(LEAVE_METHOD_CODE);
+        if (targets.contains(Integer.valueOf(code))
+                && getMethodName().equals(methodName)) {
             methodEndDealing();
         }
     }
