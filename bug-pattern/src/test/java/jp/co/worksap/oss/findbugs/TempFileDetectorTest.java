@@ -5,7 +5,7 @@ import org.junit.Test;
 import com.youdevise.fbplugins.tdd4fb.DetectorAssert;
 
 import edu.umd.cs.findbugs.BugReporter;
-public class CheckDeleteTempFileDetectorTest {
+public class TempFileDetectorTest {
 
     @Test
     public void delteTempFile() throws Exception {
