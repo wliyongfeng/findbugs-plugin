@@ -15,7 +15,7 @@
   </Detector>
 
   <BugPattern type="FORBIDDEN_SYSTEM">
-    <ShortDescription>code for publish can not use System.out
+    <ShortDescription>code for publish can not use System.out and System.err
     </ShortDescription>
     <LongDescription>we can not use System.out and System.err, please use log to
       output information
@@ -27,5 +27,26 @@
     </Details>
   </BugPattern>
 
+ <Detector class="jp.co.worksap.oss.findbugs.orm.FlushBeforeClearDetector">
+    <Details>
+      we need to flush the entity manager before clear it.
+    </Details>
+  </Detector>
+
+  <BugPattern type="FLUSH_ENTITY_MANAGER_BEFORE_CLEAR">
+    <ShortDescription>flush the entity manager before clear it
+    </ShortDescription>
+    <LongDescription>since the EntityManager#clear doesn't synchronize persistence context to RDB,
+    so we need flush the entity manager before clear it.
+    </LongDescription>
+    <Details>
+  <![CDATA[
+    <p>since the EntityManager#clear doesn't synchronize persistence context to RDB,
+    so we need flush the entity manager before clear it.</p>
+  ]]>
+    </Details>
+  </BugPattern>
+
   <BugCode abbrev="SYS">SYS</BugCode>
+  <BugCode abbrev="ORM">ORM</BugCode>
 </MessageCollection>

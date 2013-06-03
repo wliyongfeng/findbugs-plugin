@@ -7,5 +7,9 @@
     speed="fast" hidden="false" />
   <BugPattern type="FORBIDDEN_SYSTEM" abbrev="SYS"
     category="BAD_PRACTICE" />
+  <Detector class="jp.co.worksap.oss.findbugs.orm.FlushBeforeClearDetector"
+    speed="fast" hidden="false" />
+  <BugPattern type="FLUSH_ENTITY_MANAGER_BEFORE_CLEAR" abbrev="ORM"
+    category="BAD_PRACTICE" />
 
 </FindbugsPlugin>
