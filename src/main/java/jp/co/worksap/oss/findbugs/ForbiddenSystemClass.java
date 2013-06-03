@@ -7,7 +7,7 @@ import edu.umd.cs.findbugs.BugReporter;
 import edu.umd.cs.findbugs.bcel.OpcodeStackDetector;
 
 public class ForbiddenSystemClass extends OpcodeStackDetector {
-    BugReporter bugReporter;
+    private BugReporter bugReporter;
 
     public ForbiddenSystemClass(BugReporter bugReporter) {
         this.bugReporter = bugReporter;
@@ -27,7 +27,6 @@ public class ForbiddenSystemClass extends OpcodeStackDetector {
                 BugInstance bug = new BugInstance(this, "FORBIDDEN_SYSTEM",
                         NORMAL_PRIORITY).addClassAndMethod(this).addSourceLine(
                         this, getPC());
-                bug.addInt(getPC());
                 bugReporter.reportBug(bug);
             }
         }
